@@ -19,7 +19,7 @@ namespace BinaryStudio.Exam.Models
         public string LastName { get; set; }
 
 
-        [Required]
+        [Required(ErrorMessage = "Please, enter a  password!")]
         [StringLength(100, ErrorMessage = "The password must be at least {2} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         public string Password { get; set; }
