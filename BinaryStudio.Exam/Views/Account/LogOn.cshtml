@@ -1,0 +1,12 @@
+﻿@model  BinaryStudio.Exam.Models.LogOnModel
+
+<body>
+    @using(Html.BeginForm())
+    {
+        <fieldset>
+        @Html.ValidationSummary()
+        <p>Email : @Html.TextBoxFor(it => it.EMail)</p>
+        <p>password : @Html.PasswordFor(it => it.Password)</p>
+        <input type="submit" value = "Submit data"/>
+        </fieldset>    }
+</body>
