@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using System.Web.Security;
 using BinaryStudio.Exam.Core;
 using BinaryStudio.Exam.Models;
@@ -19,7 +15,7 @@ namespace BinaryStudio.Exam.Controllers
                 UserProcessor userProcessor = new UserProcessor();
                 if(userProcessor.CreateUser(registerModel))
                 {
-                    return View();
+                    return RedirectToAction("LogOn", "Account");
                 }
                 else
                 {

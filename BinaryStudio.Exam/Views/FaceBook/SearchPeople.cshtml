@@ -1,0 +1,84 @@
+﻿@model BinaryStudio.Exam.Models.SearchModel
+
+<h2>SearchPeople</h2>
+
+<head>
+    <script type="text/javascript" src="~/Scripts/jquery-1.5.1.min.js"></script>
+</head>
+
+<script language="javascript">
+    var counter = 1;
+    $(function () {
+        $("#add").click(function () {
+            if (counter > 5) {
+                alert("Only 5 textboxes allow");
+                return false;
+            }
+
+            var newTextBoxDiv = $(document.createElement('div'))
+      .attr("id", 'TextBoxDiv' + counter);
+
+            newTextBoxDiv.html('<TABLE><TR><TD> Interest:' +'<input type="text" name="textbox' + counter +
+            '" id="textbox' + counter + '" value="" ></TD>&nbsp;<TD><a href="#" value="removeButton" class="removeButton">Remove</a></TD></TR></TABLE>');
+
+            newTextBoxDiv.appendTo("#TextBoxesGroup");
+            counter++;
+            return true;
+        });
+        $(".removeButton").live("click", function () {
+            if (counter == 1) {
+                alert("No more textbox to remove");
+                return false;
+            }
+
+            counter--;
+
+            $("#TextBoxDiv" + counter).remove();
+
+        });
+
+        $("#getButtonValue").click(function () {
+
+            var msg = '';
+            for (i = 1; i < counter; i++) {
+                msg += "\n Textbox #" + i + " : " + $('#textbox' + i).val();
+            }
+            alert(msg);
+        });
+    });
+</script>
+
+
+
+@using (Html.BeginForm())
+    {
+        @Html.ValidationSummary()
+        <fieldset>
+            <p>First Name : @Html.TextBoxFor(it => it.FirstName)</p>
+            <p>Last Name : @Html.TextBoxFor(it => it.LastName)</p>
+            <p>
+                Gender? : @Html.DropDownListFor(it => it.Gender, new[]
+                                                         {
+                                                             new SelectListItem() {Text = "Male", Value = "Male"},
+                                                             new SelectListItem() {Text = "Female", Value = "Female"}
+                                                         }, "Choose")
+            </p>
+            <p>
+                Matrial Status? : @Html.DropDownListFor(it => it.Gender, new[]
+                                                         {
+                                                             new SelectListItem() {Text = "Married", Value = "Married"},
+                                                             new SelectListItem() {Text = "Single", Value = "Single"}
+                                                         }, "Choose")
+            </p>
+            <div id='TextBoxesGroup'>
+ <div id="TextBoxDiv1">
+  <TR><TD> Interest:<input type='textbox' id='textbox1' ></TD>&nbsp;<TD><a href="#" value="removeButton" class="removeButton">Remove</a></TD></TR>
+ </div>
+</div>​
+            <input type="button" value = "Search!" id = "searh" />
+            <input type="button" value = "Add Interest" id = "add"/>
+        </fieldset>
+    }
+    
+    
+

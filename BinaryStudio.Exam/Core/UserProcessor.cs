@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using BinaryStudio.Exam.Domain;
+using BinaryStudio.Exam.Helpers;
 using BinaryStudio.Exam.Models;
 
 namespace BinaryStudio.Exam.Core
@@ -19,13 +20,13 @@ namespace BinaryStudio.Exam.Core
                 }
                 try
                 {
+                    Hasher hasher = new Hasher();
                     dataBaseContext.Users.Add(new User()
                     {
                         FirstName = register.FirstName,
                         LastName = register.LastName,
                         DateOfBirth = register.DateOfBirth,
-                        //TODO: Hash
-                        Password = register.Password,
+                        Password = hasher.HashPassword(register.Mail,register.Password),
                         Gender = register.Gender,
                         MatrialStatus = register.MatrialStatus,
                         Mail = register.Mail,
@@ -46,17 +47,19 @@ namespace BinaryStudio.Exam.Core
         public bool ValidateUser(string email, string password)
         {
             DataBaseContext dataBaseContext = new DataBaseContext();
-            try
+
+            Hasher hasher = new Hasher();
+            string haS = hasher.HashPassword(email, password);
+            if (dataBaseContext.Users.Any(it => it.Mail.Equals(email.ToLower()) &&
+                                               it.Password.Equals(haS)))
             {
-                dataBaseContext.Users.Single(it => it.Mail == email &&
-                                                   it.Password == password);
                 return true;
             }
-            catch (Exception)
+            else
             {
                 return false;
             }
-            
+
         }
 
         public User GetUserByEmail(string email)

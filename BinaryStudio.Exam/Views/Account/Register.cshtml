@@ -1,6 +1,6 @@
 ﻿@model  BinaryStudio.Exam.Models.RegisterModel
 
-<body>
+
     @using (Html.BeginForm())
     {
         @Html.ValidationSummary()
@@ -24,9 +24,7 @@
                                                          }, "Choose")
             </p>
             <p>Password: @Html.PasswordFor(it => it.Password)</p>
-                
+            <p>Confirm password: @Html.PasswordFor(it => it.ConfirmPassword)</p>    
             <input type="submit" value = "Submit data"/>
         </fieldset>
     }}
-        
-</body>

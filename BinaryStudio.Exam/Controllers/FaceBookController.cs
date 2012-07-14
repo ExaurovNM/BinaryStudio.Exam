@@ -15,5 +15,10 @@ namespace BinaryStudio.Exam.Controllers
             return View();
         }
 
+        public ActionResult SearchPeople()
+        {
+            return View();
+        }
+
     }
 }

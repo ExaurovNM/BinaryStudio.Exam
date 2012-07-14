@@ -1,7 +1,9 @@
 ﻿using System.Data.Entity;
+using System.Reflection;
 using System.Web.Mvc;
 using System.Web.Routing;
 using BinaryStudio.Exam.Domain;
+using Ninject;
 
 namespace BinaryStudio.Exam
 {
@@ -22,10 +24,18 @@ namespace BinaryStudio.Exam
             routes.MapRoute(
                 "Default", // Route name
                 "{controller}/{action}/{id}", // URL with parameters
-                new { controller = "Home", action = "Index", id = UrlParameter.Optional } // Parameter defaults
+                new { controller = "FaceBook", action = "Index", id = UrlParameter.Optional } // Parameter defaults
             );
 
         }
+
+        protected IKernel CreateKernel()
+        {
+            var kernel = new StandardKernel();
+            kernel.Load(Assembly.GetExecutingAssembly());
+            return kernel;
+        }
+
 
         protected void Application_Start()
         {
@@ -34,7 +44,7 @@ namespace BinaryStudio.Exam
             RegisterGlobalFilters(GlobalFilters.Filters);
             RegisterRoutes(RouteTable.Routes);
 
-            Database.SetInitializer(new DataBaseInitializer.DatabaseInitializer());
+            Database.SetInitializer(new DataBaseInitializer());
         }
     }
 }
