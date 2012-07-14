@@ -1,0 +1,32 @@
+﻿@model  BinaryStudio.Exam.Models.RegisterModel
+@{
+    ViewBag.Title = "Response";
+}
+
+<h2>Response</h2>
+<body>
+    @using(Html.BeginForm())
+    {
+        @Html.ValidationSummary()
+        <p>First Name : @Html.TextBoxFor(it => it.FirstName)</p>
+        <p>Last Name : @Html.TextBoxFor(it => it.FirstName)</p>
+        <p>Email : @Html.TextBoxFor(it => it.Mail)</p>
+        <p>Day of Birth : @Html.TextBoxFor(it => it.DateOfBirth)</p>
+        <p>
+            Gender? : @Html.DropDownListFor(it => it.Gender, new[]
+                                                 {
+                                                     new SelectListItem() {Text = "Male", Value = "Male"},
+                                                     new SelectListItem() {Text = "Female", Value = "Female"}
+                                                 }, "Choose")
+        </p>
+        <p>
+            Matrial Status? : @Html.DropDownListFor(it => it.Gender, new[]
+                                                 {
+                                                     new SelectListItem() {Text = "Married", Value = "Married"},
+                                                     new SelectListItem() {Text = "Single", Value = "Single"}
+                                                 }, "Choose")
+        </p>
+        <p>Password: @Html.PasswordFor(it => it.Password)</p>
+                
+        <input type="submit" value = "Submit data"/>}
+</body>
