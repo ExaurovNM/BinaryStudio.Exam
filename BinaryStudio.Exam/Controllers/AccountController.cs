@@ -48,9 +48,16 @@ namespace BinaryStudio.Exam.Controllers
                 }
                 
             }
-            return View(logOn);
+            return RedirectToAction("Index", "FaceBook");
 
         }
 
+
+        public ActionResult LogOff()
+        {
+            FormsAuthentication.SignOut();
+
+            return RedirectToAction("LogOn", "Account");
+        }
     }
 }
